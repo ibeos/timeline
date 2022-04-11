@@ -1,0 +1,1003 @@
+@font-face {
+  font-family: OpenSans;
+  src: url(fonts/OpenSans.ttf) format("truetype");
+  font-display: swap;
+  font-weight: 400
+}
+
+@font-face {
+  font-family: Lora;
+  src:url(fonts/Lora-BoldItalic.ttf) format("truetype");
+  font-display:swap;
+  font-weight:400
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family:OpenSans;/*, Verdana, sans-serif;*/
+  font-size:clamp(12px,calc(.8rem + .25vw),20px);
+  font-weight:400;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  --bg:#fff;
+  --textNormal:#111;
+  --linkNormal: #111;
+  --bgMenu: #eee;
+  --bgButton:#ddd;
+  --hoverButton: #ccc;
+  --activatedButton: #bbb;
+  --bgOptionsMenu: rgba(255,255,255, 0.7);
+  --menuBorder: grey;
+  --highlight: #ff9800;
+  /* --darkmodeButton:#111; */
+
+  background-color:var(--bg);
+  color:var(--textNormal);
+}
+/* @media (prefers-color-scheme: dark) {  */
+body.dark {
+  --bg:#111;
+  --textNormal:#eee;
+  --linkNormal: #eee;/*#03a9f4;*/
+  --bgMenu: #222;
+  --bgButton:#333;
+  --hoverButton: #444;
+  --activatedButton: #555;
+  --bgOptionsMenu: rgba(0,0,0, 0.7);
+  --menuBorder: #555;
+  --highlight: #2196F3;
+  /* --darkmodeButton:#fff; */
+}
+
+html {
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--linkNormal);
+}
+
+header {
+  padding: 20px;
+}
+
+/* Tooltips */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 50%;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: var(--bgButton);
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  top: 125%;
+  left: 50%;
+  margin-left: -80px;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--bgButton) transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* -- Buttons -- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 2em;
+  margin: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  height: 2em;
+  transition: background-color 0.3s, transform 0.5s;
+  background-color: var(--bgButton); 
+  border-radius: 1em;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.button:hover {
+  background-color: var(--hoverButton);
+  cursor: pointer;
+}
+
+
+/* Top navigation bar */
+
+#navbar {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  overflow: hidden;
+  padding: 0 20px;
+  border-bottom: 2px solid var(--menuBorder);
+  height: 10%;
+  /* z-index: 99; */
+}
+
+#logo {
+  display: inline-flex;
+  align-items: center;
+  font-family: Lora;
+  font-size:clamp(1.2rem,calc(1rem + 3.5vh),4rem);
+}
+
+#toggleNav {
+  text-align: center;
+  padding: 0;
+  margin-left: auto;
+  width: 2em;
+  font-size: 20px;
+}
+
+.flash {
+  animation-name: flash;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes flash {
+  0%, 50%, 100% {
+     background-color: var(--highlight);
+  }
+  25%, 75% {
+    background-color: inherit;
+  }
+}
+
+/* The side navigation menu */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: var(--bgMenu);
+  border-left: 2px solid var(--menuBorder);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+#main {
+  height: 100vh;
+  transition: margin-right 0.5s;
+}
+
+.group-heading{
+  background-color: var(--bgMenu);
+  text-align: center;
+  border: none;
+  float: left;
+  width: 100%;
+  padding: 5px;
+}
+
+ /* Buttons that are used to open and close the accordion panel */
+ .accordion {
+  background-color: var(--bgButton);
+  /* color: #444; */
+  cursor: pointer;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.2s;
+  border-right: 5px solid;
+  float: left;
+  width: 100%;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.accordion>* {
+  float: left;
+  padding: 10px 0;
+}
+
+.accordion>div {
+  width: 80%;
+  padding-left: 10px;
+  /* margin-left: 10%; */
+}
+
+.accordion>a {
+  width: 10%;
+  height: 100%;
+  text-align: center;
+  visibility: hidden;
+}
+
+.active, .accordion:hover {
+  background-color: var(--hoverButton);
+}
+
+.active > a, .accordion:hover > a {
+  visibility: visible;
+}
+
+.panel {
+  padding: 0 18px;
+  max-height: 0;
+  width: 100%;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+} 
+
+.infoContent {
+  margin-bottom: 10px;
+}
+
+.infoCategory {
+  font-size: 12px;
+  color: grey;
+}
+
+.infoHeading {
+  font-size: 20px;
+  line-height: 20px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.infoDates {
+  font-size: 12px;
+  font-style: italic;
+  margin: 0;
+}
+
+.infoDescription {
+  font-size: 14px;
+}
+
+/* --- timeline --- */
+
+#timeline {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: 80%;
+}
+
+.vis-timeline {
+  font-size: 10pt;
+  border: 0;
+}
+
+.vis-panel.vis-left {
+  position: absolute;
+  display: block;
+  box-shadow: 4px 0 4px -2px rgba(0, 0, 0, 0.1),
+    10px 0 8px -5px rgba(0, 0, 0, 0.05);
+}
+
+.vis-panel.vis-left:hover {
+  left: 0;
+}
+
+/* group labels */
+.vis-label.vis-group-level-0, .vis-label.vis-nested-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 5px solid;
+  border-bottom-color: var(--menuBorder) !important;
+}
+
+.vis-label.vis-nested-group {
+  border-top: none;
+  border-right: none;
+}
+
+.vis-inner {
+  color: var(--textNormal);
+}
+
+.vis-ltr .vis-label.vis-nested-group .vis-inner {
+  padding-left: 50px;
+}
+
+.vis-label.vis-group-level-0 .vis-inner {
+  font-weight: bold;
+}
+
+.vis-label.vis-nested-group.vis-group-level-unknown-but-gte1 {
+  background-color: var(--bgMenu);
+}
+
+.vis-panel.vis-bottom, .vis-panel.vis-left {
+  border: 1px solid var(--menuBorder);
+}
+
+div.vis-group {
+  border-bottom-color: var(--menuBorder) !important;
+}
+
+.vis-item.vis-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10pt;
+  padding: 0 5px;
+  border: 0px;
+  border-radius: 1em;
+  height: 2em;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.vis-item.vis-selected {
+  border-color: var(--textNormal) !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 
+  0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.vis-item.vis-box.vis-selected, .vis-item.vis-range.vis-selected {
+  box-shadow: 0 0 0 3px var(--textNormal), 
+  0 2px 5px 0 rgba(0, 0, 0, 0.16), 
+  0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.vis-item.vis-line {
+  border-width: 3px;
+}
+
+.vis-item.vis-dot {
+  border-width: 5px;
+  border-radius: 50%;
+}
+
+.vis-item.vis-range {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10pt;
+  padding: 0 5px;
+  border: 0px;
+  border-radius: 0.5em;
+  height: 2em;
+}
+
+.vis-item.vis-range .vis-item-content {
+  display: inline-block;
+}
+
+.vis-item .vis-item-content {
+  text-align: center;
+}
+
+.vis-time-axis .vis-text {
+  color: var(--textNormal);
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.vis-time-axis .vis-text.vis-major {
+  font-weight: bold;
+}
+
+.vis-time-axis .vis-grid.vis-minor {
+  border-width: 1px;
+  border-color: var(--bgButton);
+}
+
+.vis-time-axis .vis-grid.vis-major {
+  border-width: 2px;
+  border-color: var(--hoverButton);
+}
+
+.itemDate {
+  font-style: italic;
+  display: none;
+}
+
+/* -- Progress Bar -- */
+
+#progressbar {
+  width: 100%;
+  height: 20%;
+  background-color: var(--bgButton);
+}
+
+#progress {
+  height: 100%;
+  min-width: 2px;
+  background-color: var(--highlight);
+}
+
+/* -- Tabs -- */
+
+#sidetab {
+  position: fixed;
+  width: 25%;
+  height: 50px;
+  overflow: hidden;
+}
+
+#SelectionMenu, #DatasetMenu {
+  display: flex;
+  flex-wrap: nowrap;
+  position: fixed;
+  top: 50px;
+  width: 25%;
+}
+
+.tab {
+  border-bottom: 1px solid var(--activatedButton);
+  overflow: hidden;
+}
+
+.tab .tablinks {
+  background-color: var(--bgButton);
+  color: inherit;
+  font-family: 'Open Sans';
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.tab .tablinks:hover {
+  background-color: var(--hoverButton);
+}
+
+.tab .tablinks.active {
+  background-color: var(--activatedButton);
+}
+
+.tabcontent {
+  display: none;
+  padding: 0;
+  border-bottom: 1px solid var(--hoverButton);
+}
+
+#infoAccordionSelection, #infoAccordionDataset {
+  margin-top: 90px;
+}
+
+/* -- Menus -- */
+
+.menu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: var(--bgMenu);
+  overflow: auto;
+}
+
+.buttonGroup {
+  font-size: 0;
+  margin: 0 10px;
+}
+
+.buttonGroup .button {
+  margin: 0;
+}
+
+.buttonGroup > :first-child, .sidenavMenu > :first-child {
+  border-radius: 1em 0 0 1em;
+}
+
+.buttonGroup > :last-child, .sidenavMenu > :last-child {
+  border-radius: 0 1em 1em 0;
+}
+
+.sidenavMenu {
+  background-color: var(--activatedButton);
+  margin: 0;
+  font-size: 0;
+  height: 40px;
+}
+
+#SelectionSearch, #DatasetSearch {
+  position: fixed;
+  top: 90px;
+  display: none;
+  width: 400px;
+  font-size: 17px;
+  padding: 8px;
+  height: 31px;
+  border: 1px solid var(--bgButton);
+  border-top: 2px solid var(--highlight);
+}
+
+#SelectionSort, #DatasetSort {
+  position: fixed;
+  top: 121px;
+  display: none;
+  width: 400px;
+  font-size: 17px;
+  padding: 8px;
+  height: 31px;
+  border: 1px solid var(--bgButton);
+  border-top: 2px solid var(--highlight);
+}
+
+/* -- control panel -- */
+
+#controlbar {
+  height: 10%;
+}
+
+#controlMenu {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-top: 2px solid var(--menuBorder);
+  height: 80%;
+}
+
+.symbol a {
+  font-size: 12px;
+}
+
+#toggleOptions {
+  font-size: 20px;
+  height: 100%;
+  border-radius: 0;
+  padding: 1em;
+  margin: 0;
+}
+
+#toggleSelectionSearch, 
+#toggleDatasetSearch {
+  height: 100%;
+  border-radius: 0;
+  margin-right: 0;
+  margin-left: auto;
+  padding: 1em;
+}
+
+#toggleOptions.active, 
+#toggleSelectionSearch.active, 
+#toggleDatasetSearch.active, 
+#toggleSelectionVisibility.active,
+#toggleSelectionSort.active,
+#toggleDatasetSort.active,
+#toggleDropup.active {
+  background-color: var(--highlight);
+  /* color: white; */
+}
+
+.infoLink {
+  transition: 0.3s;
+}
+
+.infoLink:hover {
+  color: var(--highlight);
+}
+
+#toggleDropup {
+  color: var(--textNormal);
+}
+
+#optionsMenu {
+  height: 0;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 92%;
+  background-color: var(--bgOptionsMenu);
+  border-top: 2px solid var(--menuBorder);
+  overflow-y: hidden;
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form {
+  background-color: var(--bgMenu);
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+}
+
+#visualizationOptions {
+  display: inline-flex;
+}
+
+#visualizationOptions>* {
+  width: 33%;
+  border-left: 5px solid var(--bgButton);
+}
+
+#timelineOptions>* {
+  display: flex;
+  width: 100%;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+#tlSelect {
+  flex-grow: 1;
+  height: 2em;
+}
+
+#tlSelect, #tlAdd, #tlOverview {
+  font-size: 15px;
+}
+
+#tlAdd {
+  margin-right: 0;
+}
+
+#tlOverview {
+  background-color: var(--bg);
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--bgButton);
+}
+
+#tlOverview > tbody {
+  width: 100%;
+}
+
+#tlOverview th, #tlOverview td {
+  text-align: left;
+  padding: 12px;
+}
+
+#tlOverview tr {
+  border-bottom: 1px solid var(--bgButton);
+}
+
+#tlOverview tr.header, #tlOverview tr.header:hover {
+  background-color: var(--bgButton);
+}
+
+#tlOverview tr:hover {
+  background-color: var(--bgMenu);
+}
+
+.tlRemove {
+  visibility: hidden;
+  margin: 0;
+}
+
+tr:hover > td > .tlRemove {
+  visibility: visible;
+}
+
+/* -- Modals --*/
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  text-align: center;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-header {
+  padding: 2px 16px;
+}
+
+.modal-body {
+  padding: 5px 16px;
+}
+
+.modal-body>div {
+  margin: 0;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+}
+
+.modal-content {
+  position: relative;
+  background-color: var(--bgMenu);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--menuBorder);
+  width: 30%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+} 
+
+/* The close button */
+.close {
+  color: var(--bgButton);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--hoverButton);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropup {
+  margin-left: auto;
+  margin-right: 10%;
+  overflow: hidden;
+}
+
+.dropup-content {
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  background-color: var(--bgMenu);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  width: 250px;
+  margin-left: -100px;
+  border: 3px solid var(--hoverButton);
+  border-radius: 6px;
+  padding: 10px;
+  z-index: 1;
+}
+
+.dropup-content > table {
+  width: 100%;
+}
+
+.dropup-content tr, .dropup-content td {
+  display: flex;
+}
+
+.dropup-content tr {
+  padding: 2px;
+}
+
+.dropup-content tr * {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.dropup-content button {
+  width: 100%;
+}
+
+.circle {
+  padding: 0;
+  border-radius: 1em;
+  width: 2em;
+  height: 2em;
+  border: 3px solid var(--bgButton);
+}
+
+#lightTheme {
+  background-color: #fff;
+}
+#sepiaTheme {
+  background-color: khaki;
+}
+#darkTheme {
+  background-color: #111;
+}
+
+.show {
+  display: block;
+}
+
+ /* Extra small devices (phones, 600px and down) */
+@media screen and (max-width: 600px) {
+  .form {
+    width: 95%;
+  }
+
+  #navbar {
+    padding: 20px 10px !important;
+  }
+  #navbar a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  #navbar-right {
+    float: none;
+  }
+}
+ 
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 768px) {
+  
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 992px) and (orientation: portrait) { 
+  .vis-timeline,
+  .vis-item.vis-box, .vis-item.vis-range {
+    font-size: 25px;
+  }
+  
+  .vis-inner {
+    writing-mode: vertical-rl;
+  }
+
+  .form {
+    width: 95%;
+  }
+
+  #toggleNav {
+    font-size: 50px;
+  }
+
+  .button { font-size: 25px; }
+
+  #tlSelect, #tlAdd, #tlOverview {
+    font-size: 25px;
+  }
+
+  .vis-item.vis-line {
+    border-width: 6px;
+  }
+  
+  .vis-item.vis-dot { border-width: 10px; }
+}
+ 
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 1200px) {
+
+} 
+ 
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+/* Colors */
+.highlight,.hover-highlight:hover{color:var(--textNormal)!important;background-color:var(--highlight)!important}
+
+.amber,.hover-amber:hover{color:#000!important;background-color:#ffc107!important}
+.aqua,.hover-aqua:hover{color:#000!important;background-color:#00ffff!important}
+.blue,.hover-blue:hover{color:#fff!important;background-color:#2196F3!important}
+.light-blue,.hover-light-blue:hover{color:#000!important;background-color:#87CEEB!important}
+.brown,.hover-brown:hover{color:#fff!important;background-color:#795548!important}
+.cyan,.hover-cyan:hover{color:#000!important;background-color:#00bcd4!important}
+.blue-grey,.hover-blue-grey:hover,.blue-gray,.hover-blue-gray:hover{color:#fff!important;background-color:#607d8b!important}
+.green,.hover-green:hover{color:#fff!important;background-color:#4CAF50!important}
+.light-green,.hover-light-green:hover{color:#000!important;background-color:#8bc34a!important}
+.indigo,.hover-indigo:hover{color:#fff!important;background-color:#3f51b5!important}
+.khaki,.hover-khaki:hover{color:#000!important;background-color:#f0e68c!important}
+.lime,.hover-lime:hover{color:#000!important;background-color:#cddc39!important}
+.orange,.hover-orange:hover{color:#000!important;background-color:#ff9800!important}
+.deep-orange,.hover-deep-orange:hover{color:#fff!important;background-color:#ff5722!important}
+.pink,.hover-pink:hover{color:#fff!important;background-color:#e91e63!important}
+.purple,.hover-purple:hover{color:#fff!important;background-color:#9c27b0!important}
+.deep-purple,.hover-deep-purple:hover{color:#fff!important;background-color:#673ab7!important}
+.red,.hover-red:hover{color:#fff!important;background-color:#f44336!important}
+.sand,.hover-sand:hover{color:#000!important;background-color:#fdf5e6!important}
+.teal,.hover-teal:hover{color:#fff!important;background-color:#009688!important}
+.yellow,.hover-yellow:hover{color:#000!important;background-color:#ffeb3b!important}
+.white,.hover-white:hover{color:#000!important;background-color:#fff!important}
+.black,.hover-black:hover{color:#fff!important;background-color:#000!important}
+.grey,.hover-grey:hover,.gray,.hover-gray:hover{color:#000!important;background-color:#9e9e9e!important}
+.light-grey,.hover-light-grey:hover,.light-gray,.hover-light-gray:hover{color:#000!important;background-color:#f1f1f1!important}
+.dark-grey,.hover-dark-grey:hover,.dark-gray,.hover-dark-gray:hover{color:#fff!important;background-color:#616161!important}
+.pale-red,.hover-pale-red:hover{color:#000!important;background-color:#ffdddd!important}
+.pale-green,.hover-pale-green:hover{color:#000!important;background-color:#ddffdd!important}
+.pale-yellow,.hover-pale-yellow:hover{color:#000!important;background-color:#ffffcc!important}
+.pale-blue,.hover-pale-blue:hover{color:#000!important;background-color:#ddffff!important}
+
+.text-highlight,.hover-text-highlight:hover{color:var(--highlight)!important}
+.text-amber,.hover-text-amber:hover{color:#ffc107!important}
+.text-aqua,.hover-text-aqua:hover{color:#00ffff!important}
+.text-blue,.hover-text-blue:hover{color:#2196F3!important}
+.text-light-blue,.hover-text-light-blue:hover{color:#87CEEB!important}
+.text-brown,.hover-text-brown:hover{color:#795548!important}
+.text-cyan,.hover-text-cyan:hover{color:#00bcd4!important}
+.text-blue-grey,.hover-text-blue-grey:hover,.text-blue-gray,.hover-text-blue-gray:hover{color:#607d8b!important}
+.text-green,.hover-text-green:hover{color:#4CAF50!important}
+.text-light-green,.hover-text-light-green:hover{color:#8bc34a!important}
+.text-indigo,.hover-text-indigo:hover{color:#3f51b5!important}
+.text-khaki,.hover-text-khaki:hover{color:#b4aa50!important}
+.text-lime,.hover-text-lime:hover{color:#cddc39!important}
+.text-orange,.hover-text-orange:hover{color:#ff9800!important}
+.text-deep-orange,.hover-text-deep-orange:hover{color:#ff5722!important}
+.text-pink,.hover-text-pink:hover{color:#e91e63!important}
+.text-purple,.hover-text-purple:hover{color:#9c27b0!important}
+.text-deep-purple,.hover-text-deep-purple:hover{color:#673ab7!important}
+.text-red,.hover-text-red:hover{color:#f44336!important}
+.text-sand,.hover-text-sand:hover{color:#fdf5e6!important}
+.text-teal,.hover-text-teal:hover{color:#009688!important}
+.text-yellow,.hover-text-yellow:hover{color:#d2be0e!important}
+.text-white,.hover-text-white:hover{color:#fff!important}
+.text-black,.hover-text-black:hover{color:#000!important}
+.text-grey,.hover-text-grey:hover,.text-gray,.hover-text-gray:hover{color:#757575!important}
+.text-light-grey,.hover-text-light-grey:hover,.text-light-gray,.hover-text-light-gray:hover{color:#f1f1f1!important}
+.text-dark-grey,.hover-text-dark-grey:hover,.text-dark-gray,.hover-text-dark-gray:hover{color:#3a3a3a!important}
+
+.border-amber,.hover-border-amber:hover{border-color:#ffc107!important}
+.border-aqua,.hover-border-aqua:hover{border-color:#00ffff!important}
+.border-blue,.hover-border-blue:hover{border-color:#2196F3!important}
+.border-light-blue,.hover-border-light-blue:hover{border-color:#87CEEB!important}
+.border-brown,.hover-border-brown:hover{border-color:#795548!important}
+.border-cyan,.hover-border-cyan:hover{border-color:#00bcd4!important}
+.border-blue-grey,.hover-border-blue-grey:hover,.border-blue-gray,.hover-border-blue-gray:hover{border-color:#607d8b!important}
+.border-green,.hover-border-green:hover{border-color:#4CAF50!important}
+.border-light-green,.hover-border-light-green:hover{border-color:#8bc34a!important}
+.border-indigo,.hover-border-indigo:hover{border-color:#3f51b5!important}
+.border-khaki,.hover-border-khaki:hover{border-color:#f0e68c!important}
+.border-lime,.hover-border-lime:hover{border-color:#cddc39!important}
+.border-orange,.hover-border-orange:hover{border-color:#ff9800!important}
+.border-deep-orange,.hover-border-deep-orange:hover{border-color:#ff5722!important}
+.border-pink,.hover-border-pink:hover{border-color:#e91e63!important}
+.border-purple,.hover-border-purple:hover{border-color:#9c27b0!important}
+.border-deep-purple,.hover-border-deep-purple:hover{border-color:#673ab7!important}
+.border-red,.hover-border-red:hover{border-color:#f44336!important}
+.border-sand,.hover-border-sand:hover{border-color:#fdf5e6!important}
+.border-teal,.hover-border-teal:hover{border-color:#009688!important}
+.border-yellow,.hover-border-yellow:hover{border-color:#ffeb3b!important}
+.border-white,.hover-border-white:hover{border-color:#fff!important}
+.border-black,.hover-border-black:hover{border-color:#000!important}
+.border-grey,.hover-border-grey:hover,.border-gray,.hover-border-gray:hover{border-color:#9e9e9e!important}
+.border-light-grey,.hover-border-light-grey:hover,.border-light-gray,.hover-border-light-gray:hover{border-color:#f1f1f1!important}
+.border-dark-grey,.hover-border-dark-grey:hover,.border-dark-gray,.hover-border-dark-gray:hover{border-color:#616161!important}
+.border-pale-red,.hover-border-pale-red:hover{border-color:#ffe7e7!important}.border-pale-green,.hover-border-pale-green:hover{border-color:#e7ffe7!important}
+.border-pale-yellow,.hover-border-pale-yellow:hover{border-color:#ffffcc!important}.border-pale-blue,.hover-border-pale-blue:hover{border-color:#e7ffff!important}

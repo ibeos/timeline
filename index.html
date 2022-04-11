@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+    <title>Timeline</title>
+    <meta charset="UTF-8"> 
+    <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="styles.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <!-- Modals -->
+    <div id="clearSelectionModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header red">
+                <span onclick="document.getElementById('clearSelectionModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Remove all items from the current selection?</p>
+                <div class="buttonGroup">
+                    <a class="button" id="clearSelectionBtn" title="Remove all items from selection">Yes</a>
+                    <a onclick="document.getElementById('clearSelectionModal').style.display='none'" class="button" title="Do not remove items">No</a>
+                </div>
+            </div>
+            <div class="modal-footer red">
+            </div>
+        </div> 
+    </div> 
+
+    <!-- Side navigation -->
+    <div id="infoSidenav" class="sidenav">
+
+        <!-- Tab links -->
+        <div id="sidetab" class="tab">
+            <button id="tabBtnSelection" class="tablinks" onclick="openTab(event, 'Selection')">Selection</button>
+            <button id="tabBtnDataset" class="tablinks" onclick="openTab(event, 'Dataset')">Dataset</button>
+        </div>
+
+        <!-- Tab content: Selection -->
+        <div id="Selection" class="tabcontent">
+            <div id="SelectionMenu" class="sidenavMenu menu">
+                <div class="buttonGroup">
+                    <a class="button hover-highlight" id="focusSelection" title="Focus all items in selection"><i class="fa fa-fw fa-crosshairs"></i></a>
+                    <a class="button hover-red" id="clearSelection" title="Remove all items from selection"><i class="fa fa-fw fa-times-circle"></i></a>
+                </div>
+
+                <div class="buttonGroup">
+                    <a class="button" id="sortSelection"><i title="Sorted by starting date" class="fa fa-fw fa-sort-numeric-asc"></i></a>
+                    <a class="button" id="groupSelection" title="Grouped by timeline"><i class="fa fa-fw fa-th-large"></i></a>
+                </div>
+
+                <a class="button" id="toggleSelectionSearch" title="Show searchbar"><i class="fa fa-fw fa-search"></i></a>
+            </div>
+            <input type="text" id="SelectionSearch" onkeyup="search(0)" placeholder="Search.." title="Search for items in selection">
+            
+            <div id="infoAccordionSelection"></div>
+            
+            <div class="tooltip"><i class="fa fa-fw fa-info-circle"></i>
+                <span class="tooltiptext">Items you select in the timeline get added to the selection</span>
+            </div> 
+        </div>
+
+        <!-- Tab content: Dataset -->
+        <div id="Dataset" class="tabcontent">
+            <div id="DatasetMenu" class="sidenavMenu menu">
+                <!-- <a class="button" id="toggleDatasetSort" title="Toggle sortbar"><i class="fa fa-fw fa-sort"></i></a> -->
+                
+                <div class="buttonGroup">
+                    <a class="button" id="sortDataset"><i title="Sorted by starting date" class="fa fa-fw fa-sort-numeric-asc"></i></a>
+                    <a class="button" id="groupDataset" title="Grouped by timeline"><i class="fa fa-fw fa-th-large"></i></a>
+                </div>
+                <a class="button" id="toggleDatasetSearch" title="Show searchbar"><i class="fa fa-fw fa-search"></i></a>
+            </div>
+            
+            <input type="text" id="DatasetSearch" onkeyup="search(1)" placeholder="Search.." title="Search for items in dataset">
+            
+            <div id="infoAccordionDataset"></div>
+
+        </div>       
+    </div>
+
+    <div id="main">
+
+        <!-- top navbar -->
+        <div id="navbar" class="menu">
+            <a href="#" id="logo">Timeline</a>
+            <a class="button" id="toggleNav" onclick="toggleNav()" title="Open Sidebar"><i class="fa fa-fw fa-bars"></i><!--<span id="badge"></span>--></a>
+        </div> 
+        
+        <!-- timeline container -->
+        <div id="timeline"></div>
+        
+        <!-- bottom controlbar -->
+        <div id="controlbar">
+            <div id="progressbar">
+                <div id="progress"></div>
+            </div>
+
+        <!-- timeline options menu -->
+        <div id="optionsMenu" class="menu">
+            
+            <div id="timelineOptions" class="form">
+                <label for="tlSelect">Add a timeline</label>
+                <div>
+                    <select id="tlSelect" name="tlSelect"> <option value="-1" selected>Select a timeline</option></select>
+                    <a class="button hover-green" id="tlAdd" title="Add timeline">Add</a>
+                </div>
+                <table id="tlOverview">
+                    <tr class="header">
+                        <th style="width:10%;"></th>
+                        <th>#</th>
+                        <th>Color</th>
+                        <th style="width:80%;">Name</th>
+                        <th style="width:10%;">Items</th>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                </table>
+            </div>
+            
+        </div>
+    
+            <div id="controlMenu" class="menu">
+                <div class="buttonGroup">
+                    <a class="button" id="zoomIn" title="Zoom in"><i class="fa fa-fw fa-search-plus"></i></a>
+                    <a class="button" id="zoomOut" title="Zoom out"><i class="fa fa-fw fa-search-minus"></i></a>  
+                </div>
+                <div class="buttonGroup"> 
+                    <a class="button" id="moveLeft" title="Move left"><i class="fa fa-fw fa-arrow-left"></i></a>
+                    <a class="button" id="moveRight" title="Move right"><i class="fa fa-fw fa-arrow-right"></i></a>
+                </div>
+    
+                <a class="button" id="fit" title="Fit all items">Fit items</a>
+                <a class="button" id="toggleSelectionVisibility" title="Only show items in selection"><i class="fa fa-fw fa-eye"></i></a>
+                <a class="button" id="selectVisible" title="Set selection as all currently visible items">Select visible</a>
+
+                <div class="dropup">
+                    <a class="button" id="toggleDropup" title="Style options"><i class="fa fa-fw fa-chevron-up"></i></a>
+                    <div id="styleDropup" class="dropup-content">
+                        <table>
+                            <tr><td colspan="3"><a class="button" id="toggleClustering" title="Toggle clustering">Clustering off</a></td></tr>
+                            <tr><td colspan="3"><a class="button" id="groupTimeline" title="Toggle grouping">Grouped by timeline</a></td></tr>
+                            <tr><td colspan="3"><a class="button" id="colorTimeline" title="Toggle coloring">Colored by category</a></td></tr>
+                            <tr>
+                                <td><a class="button circle" id="lightTheme" onclick="setTheme('light')" title="Light theme"></a></td>
+                                <td><a class="button circle" id="sepiaTheme" title="Sepia theme"></a></td>
+                                <td><a class="button circle" id="darkTheme" onclick="setTheme('dark')" title="Dark theme"></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <a class="button" id="toggleOptions" aria-label="Close" onclick="toggleOptions()"><i class="fa fa-fw fa-cog"></i></a>
+            </div>
+        </div>
+    
+    </div>
+
+    <script type="text/javascript" src="data.js" async defer></script>
+    <script type="text/javascript" src="timeline.js" async defer></script>
+</body>
+</html>
