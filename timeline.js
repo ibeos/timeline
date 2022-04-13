@@ -2,7 +2,7 @@
 var container = document.getElementById("timeline");
 var timeline = new vis.Timeline(container);
 
-var tl = [], data = [];
+var tl = [], data = [], sortedData = [];
 var selectedTimelines = [0];
 
 var groups, subgroups;
@@ -66,7 +66,7 @@ fillTimelineSelection();
 initVariables();
 createGroups();
 itemsToDataset();
-fillDatasetSidebar(sort(data,sortMode[1]));
+fillSidebar(1, sort(sortedData, sortMode[1]));
 determineGlobalMinMax();
 configureTimeline();
 
@@ -84,7 +84,7 @@ function fillTimelineSelection() {
 
 // fill the data object and the table showing active timelines
 function initVariables() {
-  tl = [], data = [];
+  tl = [], data = [], sortedData = [];
   var n = 0;
   var table = document.querySelector('#tlOverview > tbody').children;
 
@@ -98,6 +98,7 @@ function initVariables() {
       for (var k = 0; k < group.dates.length; k++) {
         // data = [timeline, group, date]
         data[n] = [i, j, group.dates[k]];
+        sortedData[n] = [n, i, j, group.dates[k]]
         n++;  
       }
     }
@@ -436,7 +437,6 @@ document.getElementById("groupTimeline").onclick = function() {
 }
 
 document.getElementById("colorTimeline").onclick = function() {
-  var icon = this.firstChild.classList;
   if (colors == schema.groupColor) {
     this.innerHTML = "Not colored";
     colors = schema.noColor;
@@ -450,7 +450,6 @@ document.getElementById("colorTimeline").onclick = function() {
   selectionToDataset();
   refreshContent();
 }
-
 
 // add timeline
 document.getElementById("tlAdd").onclick = function () {
@@ -468,7 +467,7 @@ document.getElementById("tlAdd").onclick = function () {
         initVariables();
         createGroups();
         itemsToDataset();
-        fillDatasetSidebar(sort(data,sortMode[1]));
+        fillSidebar(1, sort(sortedData, sortMode[1]));
   
         //timeline.setGroups(groups);
 
@@ -482,12 +481,12 @@ document.getElementById("tlAdd").onclick = function () {
 
 // remove timeline
 function tlRemove(n) {
-  selectedTimelines.splice(n,1);
+  selectedTimelines.splice(n, 1);
 
   initVariables();
   createGroups();
   itemsToDataset();
-  fillDatasetSidebar(sort(data,sortMode[1]));
+  fillSidebar(1, sort(sortedData, sortMode[1]));
 
   // timeline.setGroups(groups);
 
@@ -513,17 +512,17 @@ function addToSelection(items) {
   var accordion = document.getElementById("infoAccordionSelection");
   items.forEach(s => {
     if(!selected[s]) {
-      accordion.insertBefore(getInfoItem(s),accordion.firstChild);
-      accordion.insertBefore(getButton(s, false),accordion.firstChild);
+      // accordion.insertBefore(getInfoItem(s),accordion.firstChild);
+      // accordion.insertBefore(getButton(s, false),accordion.firstChild);
       selected[s] = true;
       numSelected++;
       document.getElementById("tabBtnSelection").innerHTML = 'Selection (' + numSelected + ')';
       if (!navOpen) document.getElementById("toggleNav").classList.add("flash");
-      // if (!navOpen) document.getElementById("badge").style.display = "block";
     }
   });
 
   selectionToDataset();
+  fillSidebar(0, sort(selectionToArray(), sortMode[0]));
   refreshContent();
 }
 
@@ -625,32 +624,34 @@ function getInfoItem(s) {
   return info;
 }
 
-// Add all items to dataset sidebar
-function fillDatasetSidebar(sortedData) {
-  var infoAccordion = document.getElementById("infoAccordionDataset");
+// Add all items to selection or dataset sidebar
+function fillSidebar(dataset, itemArray) {
+  if (dataset) var infoAccordion = document.getElementById("infoAccordionDataset");
+  else var infoAccordion = document.getElementById("infoAccordionSelection");
+  
   infoAccordion.innerHTML = "";
 
-  if (groupMode[1] == 1) { // group timelines
+  if (groupMode[dataset] == 1) { // group timelines
     // create container
     for (let i = 0; i < tl.length; i++) {
       var heading = create('div', 'group-heading');
       heading.innerHTML = tl[i].name;
       infoAccordion.appendChild(heading);
-      infoAccordion.appendChild(create('div', 'group', 'group' + i));
+      infoAccordion.appendChild(create('div', 'group', 'group' + i + '-' + dataset));
     }
     // fill container
-    for (var i = 0; i < sortedData.length; i++) {
-      document.getElementById("group" + sortedData[i][0]).appendChild(getButton(i, true));
-      document.getElementById("group" + sortedData[i][0]).appendChild(getInfoItem(i));
+    for (var i = 0; i < itemArray.length; i++) {
+      document.getElementById("group" + itemArray[i][1] + '-' + dataset).appendChild(getButton(itemArray[i][0], true));
+      document.getElementById("group" + itemArray[i][1] + '-' + dataset).appendChild(getInfoItem(itemArray[i][0]));
     }
   } else { // no groups
-    for (var i = 0; i < sortedData.length; i++) {
-      infoAccordion.appendChild(getButton(i, true));
-      infoAccordion.appendChild(getInfoItem(i));
+    for (var i = 0; i < itemArray.length; i++) {
+      infoAccordion.appendChild(getButton(itemArray[i][0], true));
+      infoAccordion.appendChild(getInfoItem(itemArray[i][0]));
     }
   }
   
-  document.getElementById("tabBtnDataset").innerHTML = 'Dataset (' + sortedData.length + ')';
+  if (dataset) document.getElementById("tabBtnDataset").innerHTML = 'Dataset (' + itemArray.length + ')';
 
   itemsToDataset();
   refreshContent();
@@ -691,8 +692,6 @@ function toggleNav() {
     document.getElementById("toggleNav").title = "Close Sidebar";
     document.getElementById("toggleNav").style.transform = "rotate(-90deg)";
     document.getElementById("toggleNav").classList.remove("flash");
-    
-    //document.getElementById("badge").style.display = "none";
     navOpen = true;
   }
 }
@@ -776,14 +775,27 @@ document.getElementById("clearSelectionBtn").onclick = function () {
  *  Sort & Search
  * *********************************/
 
+function selectionToArray() {
+  var array = [];
+
+  for(var i = 0; i < selected.length; i++) {
+    if (selected[i]) {
+      array.push([i, ...data[i]])
+    }
+  }
+  return array;
+}
+
 function toggleSort(dataset) {
-  var button, icon;
+  var button, icon, array;
   if (dataset) {
     button = document.getElementById("sortDataset");
     icon = document.getElementById("sortDataset").firstChild.classList;
+    array = sortedData;
   } else {
     button = document.getElementById("sortSelection");
     icon = document.getElementById("sortSelection").firstChild.classList;
+    array = selectionToArray();
   }
 
   if (sortMode[dataset] == 0) {
@@ -791,13 +803,13 @@ function toggleSort(dataset) {
     icon.add("fa-sort-numeric-asc");
     button.title = "Sorted by starting date";
     sortMode[dataset] = 1;
-    fillDatasetSidebar(sort(data,sortMode[dataset]));
+    fillSidebar(dataset, sort(array, sortMode[dataset]));
   } else if (sortMode[dataset] == 1) {
     icon.remove("fa-sort-numeric-asc");
     icon.add("fa-sort-alpha-asc");
     button.title = "Sorted alphabetically";
     sortMode[dataset] = 0;
-    fillDatasetSidebar(sort(data,sortMode[dataset]));
+    fillSidebar(dataset, sort(array, sortMode[dataset]));
   }
 }
 
@@ -806,13 +818,14 @@ document.getElementById("sortDataset").onclick = function () { toggleSort(1); }
 
 function sort(array, mode) {
 
-  // copy of array
+  //create copy of array
+  // sortedArray = [...array]
 
   if (mode) { 
     // sort numerical
     array.sort(function(a, b) {
-      var dateA = parseDate(a[2][0]);
-      var dateB = parseDate(b[2][0]);
+      var dateA = parseDate(a[3][0]);
+      var dateB = parseDate(b[3][0]);
 
       if (dateA < dateB) return -1;
       if (dateA > dateB) return 1;
@@ -822,8 +835,8 @@ function sort(array, mode) {
   else { 
     // sort alphabetical
     array.sort(function(a, b) {
-      var nameA = a[2][4].toUpperCase();
-      var nameB = b[2][4].toUpperCase();
+      var nameA = a[3][3].toUpperCase();
+      var nameB = b[3][3].toUpperCase();
 
       if (nameA < nameB) return -1;
       if (nameA > nameB) return 1;
@@ -834,13 +847,15 @@ function sort(array, mode) {
 }
 
 function toggleGroup(dataset) {
-  var button, icon;
+  var button, icon, array;
   if (dataset) {
     button = document.getElementById("groupDataset");
     icon = document.getElementById("groupDataset").firstChild.classList;
+    array = sortedData;
   } else {
     button = document.getElementById("groupSelection");
     icon = document.getElementById("groupSelection").firstChild.classList;
+    array = selectionToArray();
   }
   
   if (groupMode[dataset] == 1) {
@@ -848,13 +863,13 @@ function toggleGroup(dataset) {
     icon.add("fa-list");
     button.title = "Items not grouped";
     groupMode[dataset] = 0;
-    fillDatasetSidebar(sort(data,sortMode[1]));
+    fillSidebar(dataset, sort(array, sortMode[1]));
   } else if (groupMode[dataset] == 0) {
     icon.remove("fa-list");
     icon.add("fa-th-large");
     button.title = "Items grouped by timeline";
     groupMode[dataset] = 1;
-    fillDatasetSidebar(sort(data,sortMode[1]));
+    fillSidebar(dataset, sort(array, sortMode[1]));
   } 
   //   else if (groupMode[dataset] == 1) {
   //   icon.remove("fa-th-large");
