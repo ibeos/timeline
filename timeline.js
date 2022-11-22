@@ -3,7 +3,7 @@ var container = document.getElementById("timeline");
 var timeline = new vis.Timeline(container);
 
 var tl = [], data = [], sortedData = [];
-var selectedTimelines = [0];
+var selectedTimelines = [1];
 
 var groups, subgroups;
 var itemsMainGroups = [], itemsSubGroups = [];
@@ -190,6 +190,7 @@ function itemsToDataset() {
     var start = parseDate(item[schema.date_start]);
     var end = new Date();
     if (item[schema.date_end] == null) end = start;
+    else if (item[schema.date_end] == "now") end = Date.now();
     else end = parseDate(item[schema.date_end]);
 
     content = '<div class="itemTitle">' + item[schema.title];// + '</div><div class="itemDate">' + data[j][0][0] + '</div>';
@@ -212,7 +213,7 @@ function itemsToDataset() {
       end: end,
       type: types[item[schema.type]-1],
       content: content,
-      title: item[schema.title] + ' (' + dates + ')',
+      title: '<b>' + item[schema.title] + '</b> (' + dates + ') <br>' + item[schema.description],
       className: color + ' border-' + color
     });
 
@@ -271,6 +272,7 @@ function configureTimeline() {
     zoomMin: 1000 * 60 * 60 * 24 * 5, // one day in milliseconds
     //zoomMax: 1000 * 60 * 60 * 24 * 31 * 3,     // about three months in milliseconds
     locale: 'en',
+    showCurrentTime: true,
     groupOrder: function (a, b) {
       return a.value - b.value;
     },
@@ -463,7 +465,7 @@ document.getElementById("tlAdd").onclick = function () {
         alert("Only a maximum of 3 timelines can be added");
       } else {
         selectedTimelines.push(id);
-  
+        console.log(selectedTimelines)
         initVariables();
         createGroups();
         itemsToDataset();

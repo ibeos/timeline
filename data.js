@@ -2,7 +2,8 @@ function getTimelineData() {
 
   return {
     "timelines": [ 
-
+    
+    // Civilizations and Empires
     {
       "name": "Civilizations and Empires",
       "description": "",
@@ -57,13 +58,105 @@ function getTimelineData() {
           "name": "America",
           "color": "green",
           "dates": [
-            [[-2000],       [1697],        2, "Maya civilization", "","Maya_civilization"],
-            [[1428],       [1521],        2, "Aztec Empire", "","Aztec_Empire"],
-            [[1438],       [1572],        2, "Inca Empire", "","Inca_Empire"],
+            [[-2000], [1697], 2, "Maya civilization", "","Maya_civilization"],
+            [[1428], [1521], 2, "Aztec Empire", "","Aztec_Empire"],
+            [[1438], [1572], 2, "Inca Empire", "","Inca_Empire"],
           ]
         }
       ]
-    }
+    },
+
+    // History of Japan
+    {
+      "name": "History of Japan",
+      "description": "A timeline of Japanese history. Events are sorted in the categories Politics, Culture, Science. The category Periods shows the accepted succession of historical periods.",
+      "color": "indigo",
+      "options": {
+        "min": [-1100,1,1],
+        "max": [2100,1,1],
+      },
+      "groups": [
+        {
+          "name": "Periods",
+          "color": "red",
+          "dates": [
+            [[-1000], [300], 2, "Yayoi", "弥生時代","Yayoi_period"],
+            [[300], [538], 2, "Kofun", "古墳時代","Kofun_period"],
+            [[538], [710], 2, "Asuka", "飛鳥時代","Asuka_period"],
+            [[710], [794], 2, "Nara", "奈良時代","Nara_period"],
+            [[794], [1185], 2, "Heian", "平安時代","Heian_period"],
+            [[1185], [1333], 2, "Kamakura", "鎌倉時代","Kamakura_period"],
+            [[1333], [1336], 2, "Kenmu Restoration", "建武の新政","Kenmu_Restoration"],
+            [[1336], [1573], 2, "Muromachi (Ashikaga)", "室町時代","Muromachi_period"],
+            [[1573], [1603], 2, "Azuchi–Momoyama", "安土桃山時代","Azuchi–Momoyama_period"],
+            [[1603], [1868], 2, "Edo (Tokugawa)", "江戸時代","Edo_period"],
+            [[1868], [1912], 2, "Meiji", "明治時代","Meiji_(era)"],
+            [[1912], [1926], 2, "Taishō", "大正","Taishō_era"],
+            [[1926], [1989], 2, "Shōwa", "昭和","Shōwa_(1926–1989)"],
+            [[1989], [2019], 2, "Heisei", "平成","Heisei_era"],
+            [[2019], [2021], 2, "Reiwa", "令和","Reiwa_era"],
+          ]
+        },
+        {
+          "name": "Politics",
+          "color": "purple",
+          "dates": [
+            [[-189], null, 1, "Himiko", "Queen Himiko (卑弥呼), Japan's first known ruler, comes to power", "Himiko"],
+            [[735], null, 1, "Smallpox Epidemic", "A smallpox epidemic kills over a quarter of the population", "735–737_Japanese_smallpox_epidemic"],
+
+            [[895], null, 1, "Isolation", "Japan isolates itself by cutting imperial embassies to China", ""],
+            [[939], null, 1, "Taira no Masakado Rebellion", "Rebellion of Taira no Masakado, considered first samurai war", ""],
+            [[1274], null, 1, "1. Mongol Invasion", "First Mongol invasion of Japan", ""],
+            [[1281], null, 1, "2. Mongol Invasion", "Second Mongol invasion of Japan", ""],
+
+            [[1467], [1615], 2, "Sengoku period", "戦国時代", "Sengoku_period"],
+
+            [[1543], null, 1, "European Arrival", "First Europeans arrive in Japan, start of Nanban trade period", ""],
+            [[1592], null, 1, "1. Invasion of Korea", "First Japanese invasion of Korea", ""],
+            [[1597], null, 1, "2. Invasion of Korea", "Second Japanese invasion of Korea", ""],
+            [[1598], null, 1, "Withdrawal from Korea", "Japan withdraws from Korea", ""],
+            [[1609], null, 1, "Invasion of Okinawa", "Invasion of Okinawa by Satsuma, a Japanese province", ""],
+            [[1614], null, 1, "Expulsion of Jesuits", "Expulsion of the Jesuits from Japan", ""],
+            [[1635], null, 1, "Locked Country", "Sakoku \"locked country\" policy bans any contact with foreigners", ""],
+            [[1854], null, 1, "Black Ships", "American \"Black Ships\" force Japan into trade agreements", ""],
+            [[1868], null, 1, "Boshin War", "Boshin War begins", ""],
+            [[1868], null, 1, "Tokyo", "Tokyo becomes capital", ""],
+            [[1890], null, 1, "Meiji Constitution", "Japan becomes a constitutional monarchy", ""],
+            [[1904], null, 1, "Russo-Japanese War", "Start of Russo-Japanese War", ""],
+            [[1931], null, 1, "Invasion of Manchuria", "Japanese invasion of Manchuria", ""],
+            [[1937], null, 1, "Invasion of China", "Japan launches full-scale invasion of China", ""],
+            [[1941,12,7], null, 1, "Pearl Harbor", "Japan attacks Pearl Harbor", "Attack_on_Pearl_Harbor"],
+            [[1945,8,6], null, 1, "Hiroshima and Nagasaki", "Atomic bombings of Hiroshima and Nagasaki", "Atomic_bombings_of_Hiroshima_and_Nagasaki"],
+          ]
+        },
+        {
+          "name": "Culture",
+          "color": "amber",
+          "dates": [
+            [[538], null, 1, "Buddhism", "Introduction of Buddhism from China", "Buddhism"],
+            [[607], null, 1, "Hōryū-ji", "Hōryū-ji Temple is founded", "Horyu-ji"],
+            [[712], null, 1, "Kojiki", "The Kojiki (古事記), Japan's first written document, is created", "Kojiki"],
+            [[752], null, 1, "Great Buddha", "The Great Buddha of the Tōdai-ji Temple is completed", "Tōdai-ji"],
+
+            [[864], null, 1, "Mount Fuji erupts", "", ""],
+            [[905], null, 1, "Samurai", "Word \"samurai\" appears in the Kokin Wakashu poem collection", ""],
+            [[1008], null, 1, "Tale of Genji", "The Tale of Genji published, considered world's first novel", ""],
+            [[1498], null, 1, "Meio Nankaido Earthquake", "", ""],
+            [[1600], null, 1, "Red Seal Ships", "Japan begins trade missions known as the Red Seal Ships", ""],
+            [[1707], null, 1, "Mount Fuji erupts", "", ""],
+            [[1923], null, 1, "Great Kanto Earthquake", "", ""],
+            [[1964], null, 1, "Summer Olympics", "Tokyo hosts the Summer Olympics", ""],
+            [[1968], null, 1, "Economy", "Japan becomes world's second biggest economy", ""],
+            [[1991], null, 1, "Economic Crash", "Japanese economic bubble pops, asset prices plunge", ""],
+            [[2002], null, 1, "World Cup", "Japan and South Korea host the FIFA World Cup", ""],
+            [[2010], null, 1, "China overtakes Japan", "China overtakes Japan as world's second biggest economy", ""],
+            [[2011,3,11], null, 1, "Tohoku Earthquake", "Tohoku Earthquake and Tsunami", "2011_Tōhoku_earthquake_and_tsunami"],
+          ]
+        }
+      ]
+    },
+
+
     
     ] // End Timelines
   }
