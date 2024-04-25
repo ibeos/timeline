@@ -17,9 +17,9 @@ function getTimelineData() {
           "name": "Europe",
           "color": "blue",
           "dates": [
-            [[-450],       [-1],        2, "Celts (La Tène)", "","La_Tène_culture"],
-            [[-1200],       [600],        2, "Ancient Greece", "","Ancient_Greece"],
-            [[-753],       [476],        2, "Ancient Rome", "","Ancient_Rome"],
+            [[-450],       [-1],        2, "Celts (La Tène)", "A European Iron Age culture","La_Tène_culture"],
+            [[-1200],       [600],        2, "Ancient Greece", "A loose collection of culturally and linguistically related city-states","Ancient_Greece"],
+            [[-753],       [476],        2, "Ancient Rome", "Encompasses the founding of the Italian city of Rome, the Roman Kingdom, Roman Republic, Roman Empire, and the collapse of the Western Roman Empire","Ancient_Rome"],
             [[395],       [1453],        2, "Byzantine Empire", "","Byzantine_Empire"],
             [[962],       [1806],        2, "Holy Roman Empire", "","Holy_Roman_Empire"],
           ]
@@ -69,7 +69,7 @@ function getTimelineData() {
     // History of Japan
     {
       "name": "History of Japan",
-      "description": "A timeline of Japanese history. Events are sorted in the categories Politics, Culture, Science. The category Periods shows the accepted succession of historical periods.",
+      "description": "A timeline of Japanese history. Events are sorted in the categories Politics, Culture. The category Periods shows the accepted succession of historical periods.",
       "color": "indigo",
       "options": {
         "min": [-1100,1,1],
@@ -153,6 +153,225 @@ function getTimelineData() {
             [[2011,3,11], null, 1, "Tohoku Earthquake", "Tohoku Earthquake and Tsunami", "2011_Tōhoku_earthquake_and_tsunami"],
           ]
         }
+      ]
+    },
+
+    // History of China
+    {
+      "name": "History of China",
+      "description": "A timeline of Chinese history. Events are sorted in the categories Politics, Culture, Science. The category Periods shows the accepted succession of historical periods.",
+      "color": "red",
+      "options": {
+        "min": [-1100,1,1],
+        "max": [2100,1,1],
+      },
+      "groups": [
+        {
+          "name": "Dynasties",
+          "color": "red",
+          "dates": [
+            [[-2070],       [-1600],      2, "Xia", "", "Xia_dynasty"],
+            [[-1600],       [-1046],      2, "Shang", "", "Shang_dynasty"],
+            [[-1046],       [-256],       2, "Zhou", "", "Zhou_dynasty"],
+            [[-722],        [-476],       2, "Spring & Autumn", "", "Spring_and_Autumn_period"],
+            [[-476],        [-221],       2, "Warring States", "", "Warring_States_period"],
+            [[-221],        [-206],       2, "Qin", "", "Qin_dynasty"],
+            [[-206],        [220],        2, "Han", "", "Han_dynasty"],
+            [[220],         [280],        2, "Three Kingdoms", "", "link"],
+            [[266],         [420],        2, "Jin", "", "link"],
+            [[420],         [589],        2, "Northern and Southern", "", "link"],
+            [[581],         [618],        2, "Sui", "", "link"],
+            [[618],         [907],        2, "Tang", "", "link"],
+            [[907],         [960],        2, "Five Dynasties, 10 Kingdoms", "", "link"],
+            [[960],         [1279],       2, "Song, Liao, Jin, Western Xia", "", "link"],
+            [[1271],        [1368],       2, "Yuan", "", "link"],
+            [[1368],        [1644],       2, "Ming", "", "link"],
+            [[1644],        [1912],       2, "Qing", "", "link"],
+            [[1912],        [2021],       2, "Republic of China", "", "link"],
+            [[1949],        [2021],       2, "Peoples Republic of China", "", "link"]
+          ]
+        },
+        {
+          "name": "Politics",
+          "color": "purple",
+          "dates": [
+            [[-2711],       [-2598],      2, "Yellow Emperor", "", "Yellow_Emperor"],
+            [[-2295],       [-2197],      2, "Yu the Great", "", "Yu_the_Great"],
+            [[-1046],       null,         1, "Battle of Muye", "", "Battle_of_Muye"],
+            [[-259,2,18],   [-210,9,10],  2, "Qin Shi Huang", "", "Qin_Shi_Huang"],
+            [[208],         null,         1, "Battle of Red Cliffs", "", "Battle_of_Red_Cliffs"],
+            [[624,2,17],    [705,12,16],  2, "Wu Zetian", "", "Wu_Zetian"], 
+            [[630],         [700,11,11],  2, "Di Renjie", "", "Di_Renjie"], 
+            [[1893,12,26],  [1976,11,9],  2, "Mao Zedong", "", "Mao_Zedong"]
+          ]
+        },
+        {
+          "name": "Culture",
+          "color": "amber",
+          "dates": [
+            [[-551],        [-479],       2, "Confucius", "", "Confucius"],
+            [[-340],        [-278],       2, "Qu Yuan", "", "Qu_Yuan"],
+            [[-296],        null,         1, "Bamboo Annals", "", "Bamboo_Annals"],
+            [[-94],         null,         1, "Records of the Grand Historian", "", "Records_of_the_Grand_Historian"],
+            [[627],         null,         1, "Journey to the West", "", "Journey_to_the_West"]
+          ]
+        },
+        {
+          "name": "Science",
+          "color": "blue",
+          "dates": [
+            [[78],          [139],        2, "Zhang Heng", "", "link"], 
+            [[132],         null,         1, "Seismograph", "", "link"], 
+            [[141],         [208],        2, "Hua Tuo", "", "link"], 
+            [[150],         [219],        2, "Zhang Zhongjing", "", "link"]
+          ]
+        }
+      ]
+    },
+
+    // // History of Science
+    // {
+    //   "name": "History of Sciene",
+    //   "description": "A timeline of scientific discoveries. Events are sorted in the categories Physics, Chemistry, Biology, Medicine. The category Periods shows the accepted succession of historical periods.",
+    //   "color": "blue",
+    //   "options": {
+    //     "min": [-1100,1,1],
+    //     "max": [2100,1,1],
+    //   },
+    //   "groups": [
+    //     {
+    //       "name": "Periods",
+    //       "color": "red",
+    //       "dates": [
+    //         [[-1000], [300], 2, "Yayoi", "弥生時代","Yayoi_period"],
+    //       ]
+    //     },
+    //     {
+    //       "name": "Politics",
+    //       "color": "purple",
+    //       "dates": [
+    //         [[-189], null, 1, "Himiko", "Queen Himiko (卑弥呼), Japan's first known ruler, comes to power", "Himiko"],
+            
+    //       ]
+    //     },
+    //     {
+    //       "name": "Culture",
+    //       "color": "amber",
+    //       "dates": [
+    //         [[538], null, 1, "Buddhism", "Introduction of Buddhism from China", "Buddhism"],
+            
+    //       ]
+    //     },
+    //     {
+    //       "name": "Science",
+    //       "color": "blue",
+    //       "dates": [
+    //         [[538], null, 1, "Buddhism", "Introduction of Buddhism from China", "Buddhism"],
+            
+    //       ]
+    //     }
+    //   ]
+    // },
+
+    // // History of Flight and Spacetravel
+    // {
+    //   "name": "History of Flight and Spacetravel",
+    //   "description": "A timeline of scientific discoveries. Events are sorted in the categories Physics, Chemistry, Biology, Medicine. The category Periods shows the accepted succession of historical periods.",
+    //   "color": "blue",
+    //   "options": {
+    //     "min": [-1100,1,1],
+    //     "max": [2100,1,1],
+    //   },
+    //   "groups": [
+    //     {
+    //       "name": "Periods",
+    //       "color": "red",
+    //       "dates": [
+    //         [[-1000], [300], 2, "Yayoi", "弥生時代","Yayoi_period"],
+    //       ]
+    //     },
+    //     {
+    //       "name": "Politics",
+    //       "color": "purple",
+    //       "dates": [
+    //         [[-189], null, 1, "Himiko", "Queen Himiko (卑弥呼), Japan's first known ruler, comes to power", "Himiko"],
+            
+    //       ]
+    //     },
+    //     {
+    //       "name": "Culture",
+    //       "color": "amber",
+    //       "dates": [
+    //         [[538], null, 1, "Buddhism", "Introduction of Buddhism from China", "Buddhism"],
+            
+    //       ]
+    //     },
+    //     {
+    //       "name": "Science",
+    //       "color": "blue",
+    //       "dates": [
+    //         [[538], null, 1, "Buddhism", "Introduction of Buddhism from China", "Buddhism"],
+            
+    //       ]
+    //     }
+    //   ]
+    // },
+
+    // Ancient Rome
+    {
+      "name": "Ancient Rome",
+      "description": "A timeline of ancient Rome.",
+      "color": "amber",
+      "options": {
+        "min": [-1100,1,1],
+        "max": [1600,1,1],
+      },
+      "groups": [
+        {
+          "name": "Periods",
+          "color": "red",
+          "dates": [
+            [[-750], [-510], 2, "Roman Kingdom", "Rome is ruled by the (semi-mythological) seven kings of Rome: Romulus, Numa Pompilius, Tulus Hostilius, Ancus Marcius, Lucius Tarquinius Priscus, Servius Tullius, Lucius Tarquinius Superbus. ", "Roman_Kingdom"],
+            [[-509], [-28], 2, "Roman Republic", "The Roman Republic is ruled with a system of elected officials.", "Roman_Republic"]
+            [[-27], [394], 2, "Roman Empire", "The Roman Empire is ruled by an emperor.", "Roman_Empire"]
+            [[395], [476], 2, "Western Roman Empire", "The Western Roman Empire.", "Western_Roman_Empire"]
+            [[395], [1453], 2, "Eastern Roman Empire", "The Eastern Roman Empire (Byzantine Empire).", "Byzantine_Empire"]
+          ]
+        },
+        {
+          "name": "Politics",
+          "color": "purple",
+          "dates": [
+
+            [[-753], null, 1, "Traditional founding of Rome", "According to legend, Rome is founded by Romulus.", ""],
+            [[-390], null, 1, "Sack of Rome by the Gauls", "Rome is sacked by the Gauls under Brennus.", ""],
+            [[-264], [-241], 2, "First Punic War", "First major conflict between Rome and Carthage over control of Sicily.", ""],
+            [[-218], [-201], 2, "Second Punic War", "Hannibal leads Carthaginian forces in a daring invasion of Italy.", ""],
+            [[-149], [-146], 2, "Third Punic War", "Rome destroys Carthage, ending the Punic Wars.", ""],
+            [[-133], null, 1, "Tiberius Gracchus murdered", "Beginning of political unrest leading to the fall of the Republic.", ""],
+            [[-60], null, 1, "Formation of the First Triumvirate", "Julius Caesar, Pompey, and Crassus form an alliance.", ""],
+            [[-49], [-45], 2, "Caesar's Civil War", "Julius Caesar defeats Pompey, becoming dictator of Rome.", ""],
+            [[-44], null, 1, "Assassination of Julius Caesar", "Julius Caesar is assassinated on the Ides of March.", ""],
+            [[-31], null, 1, "Battle of Actium", "Octavian defeats Antony and Cleopatra, becoming ruler of Rome.", ""],
+            [[-27], null, 1, "Octavian becomes Augustus", "Octavian becomes the first Emperor of Rome, establishing the Empire.", ""],
+            [[70], null, 1, "Destruction of the Second Temple", "Roman army destroys the Second Temple in Jerusalem.", ""],
+            [[79], null, 1, "Eruption of Mount Vesuvius", "Volcanic eruption buries Pompeii and Herculaneum.", ""],
+            [[235], [285], 2, "Crisis of the Third Century", "Period of political instability, economic crisis, and civil wars.", "Crisis_of_the_Third_Century"]
+            [[313], null, 1, "Edict of Milan", "Constantine grants religious tolerance to Christians in the Roman Empire.", ""],
+            [[395], null, 1, "Division of the Roman Empire", "The Roman Empire splits into the Western Roman Empire and the Eastern Roman Empire (Byzantine Empire)."]
+            [[410], null, 1, "Sack of Rome by the Visigoths", "Rome is sacked for the first time in over 800 years.", ""],
+            [[476], null, 1, "Fall of the Western Roman Empire", "Traditional date for the fall of the Western Roman Empire.", ""],
+
+          ]
+        },
+        {
+          "name": "Culture",
+          "color": "amber",
+          "dates": [
+            [[-620], null, 1, "Ostia", "Possible founding date for Ostia, the port of Rome. ", ""],
+            
+          ]
+        },
       ]
     },
 
