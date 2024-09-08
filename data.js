@@ -162,7 +162,7 @@ function getTimelineData() {
       "description": "A timeline of Chinese history. Events are sorted in the categories Politics, Culture, Science. The category Periods shows the accepted succession of historical periods.",
       "color": "red",
       "options": {
-        "min": [-1100,1,1],
+        "min": [-3000,1,1],
         "max": [2100,1,1],
       },
       "groups": [
@@ -229,49 +229,124 @@ function getTimelineData() {
       ]
     },
 
-    // // History of Science
-    // {
-    //   "name": "History of Sciene",
-    //   "description": "A timeline of scientific discoveries. Events are sorted in the categories Physics, Chemistry, Biology, Medicine. The category Periods shows the accepted succession of historical periods.",
-    //   "color": "blue",
-    //   "options": {
-    //     "min": [-1100,1,1],
-    //     "max": [2100,1,1],
-    //   },
-    //   "groups": [
-    //     {
-    //       "name": "Periods",
-    //       "color": "red",
-    //       "dates": [
-    //         [[-1000], [300], 2, "Yayoi", "弥生時代","Yayoi_period"],
-    //       ]
-    //     },
-    //     {
-    //       "name": "Politics",
-    //       "color": "purple",
-    //       "dates": [
-    //         [[-189], null, 1, "Himiko", "Queen Himiko (卑弥呼), Japan's first known ruler, comes to power", "Himiko"],
+    // Ancient Rome
+    {
+      "name": "Ancient Rome",
+      "description": "A timeline of ancient Rome.",
+      "color": "amber",
+      "options": {
+        "min": [-1100,1,1],
+        "max": [1600,1,1],
+      },
+      "groups": [
+        {
+          "name": "Periods",
+          "color": "red",
+          "dates": [
+            [[-750], [-510], 2, "Roman Kingdom", "Rome is ruled by the (semi-mythological) seven kings of Rome: Romulus, Numa Pompilius, Tulus Hostilius, Ancus Marcius, Lucius Tarquinius Priscus, Servius Tullius, Lucius Tarquinius Superbus. ", "Roman_Kingdom"],
+            [[-509], [-28], 2, "Roman Republic", "The Roman Republic is ruled with a system of elected officials.", "Roman_Republic"],
+            [[-27], [394], 2, "Roman Empire", "The Roman Empire is ruled by an emperor.", "Roman_Empire"],
+            [[395], [476], 2, "Western Roman Empire", "The Western Roman Empire.", "Western_Roman_Empire"],
+            [[395], [1453], 2, "Eastern Roman Empire", "The Eastern Roman Empire (Byzantine Empire).", "Byzantine_Empire"],
+          ]
+        },
+        {
+          "name": "Politics",
+          "color": "purple",
+          "dates": [
+            [[-753], null, 1, "Traditional founding of Rome", "According to legend, Rome is founded by Romulus.", ""],
+            [[-390], null, 1, "Sack of Rome by the Gauls", "Rome is sacked by the Gauls under Brennus.", ""],
+            [[-264], [-241], 2, "First Punic War", "First major conflict between Rome and Carthage over control of Sicily.", ""],
+            [[-218], [-201], 2, "Second Punic War", "Hannibal leads Carthaginian forces in a daring invasion of Italy.", ""],
+            [[-149], [-146], 2, "Third Punic War", "Rome destroys Carthage, ending the Punic Wars.", ""],
+            [[-133], null, 1, "Tiberius Gracchus murdered", "Beginning of political unrest leading to the fall of the Republic.", ""],
+            [[-60], null, 1, "Formation of the First Triumvirate", "Julius Caesar, Pompey, and Crassus form an alliance.", ""],
+            [[-49], [-45], 2, "Caesar's Civil War", "Julius Caesar defeats Pompey, becoming dictator of Rome.", ""],
+            [[-44], null, 1, "Assassination of Julius Caesar", "Julius Caesar is assassinated on the Ides of March.", ""],
+            [[-31], null, 1, "Battle of Actium", "Octavian defeats Antony and Cleopatra, becoming ruler of Rome.", ""],
+            [[-27], null, 1, "Octavian becomes Augustus", "Octavian becomes the first Emperor of Rome, establishing the Empire.", ""],
+            [[70], null, 1, "Destruction of the Second Temple", "Roman army destroys the Second Temple in Jerusalem.", ""],
+            [[79], null, 1, "Eruption of Mount Vesuvius", "Volcanic eruption buries Pompeii and Herculaneum.", ""],
+            [[235], [285], 2, "Crisis of the Third Century", "Period of political instability, economic crisis, and civil wars.", "Crisis_of_the_Third_Century"],
+            [[313], null, 1, "Edict of Milan", "Constantine grants religious tolerance to Christians in the Roman Empire.", ""],
+            [[395], null, 1, "Division of the Roman Empire", "The Roman Empire splits into the Western Roman Empire and the Eastern Roman Empire (Byzantine Empire).", ""],
+            [[410], null, 1, "Sack of Rome by the Visigoths", "Rome is sacked for the first time in over 800 years.", ""],
+            [[476], null, 1, "Fall of the Western Roman Empire", "Traditional date for the fall of the Western Roman Empire.", ""],
+          ]
+        }
+      ]
+    },
+    
+
+    // History of Science
+    {
+      "name": "History of Sciene",
+      "description": "A timeline of scientific discoveries. Events are sorted in the categories Physics, Chemistry, Biology, Medicine. The category Periods shows the accepted succession of historical periods.",
+      "color": "blue",
+      "options": {
+        "min": [-1100,1,1],
+        "max": [2100,1,1],
+      },
+      "groups": [
+        {
+          "name": "Physics",
+          "color": "blue",
+          "dates": [
+            [[-300], null, 1, "Geometry (Egypt/Greece)", "Euclid compiles 'Elements', laying down the foundations of geometry.", ""],
+            [[1543], null, 1, "Heliocentrism (Poland)", "Copernicus publishes 'De Revolutionibus Orbium Coelestium', proposing the heliocentric model of the solar system.", ""],
+            [[1609], null, 1, "Telescopic Astronomy (Italy/Netherlands)", "Galileo Galilei uses a telescope to observe celestial objects, supporting Copernican heliocentrism.", ""],
+            [[1687], null, 1, "Classical Mechanics (England)", "Isaac Newton publishes 'Philosophiæ Naturalis Principia Mathematica', formulating laws of motion and universal gravitation.", ""],
+            [[1798], null, 1, "Electricity (Italy)", "Alessandro Volta invents the electric battery, paving the way for modern electrical science.", ""],
+            [[1800], null, 1, "Electromagnetism (Denmark)", "Hans Christian Ørsted discovers that electric currents create magnetic fields.", ""],
+            [[1865], null, 1, "Maxwell's Equations (Scotland)", "James Clerk Maxwell publishes his equations, unifying electricity and magnetism into electromagnetism.", ""],
+            [[1895], null, 1, "X-rays (Germany)", "Wilhelm Conrad Röntgen discovers X-rays, revolutionizing medical imaging.", ""],
+            [[1905], null, 1, "Special Theory of Relativity (Switzerland)", "Albert Einstein publishes his theory of special relativity, including the famous equation E=mc².", ""],
+            [[1915], null, 1, "General Theory of Relativity (Germany)", "Albert Einstein publishes his theory of general relativity, explaining gravity as the curvature of spacetime.", ""],
+            [[1927], null, 1, "Quantum Mechanics (Denmark)", "Niels Bohr proposes the Copenhagen interpretation of quantum mechanics, revolutionizing our understanding of the microscopic world.", ""],
+            [[1964], null, 1, "Cosmic Microwave Background Radiation (USA)", "Arno Penzias and Robert Wilson discover the cosmic microwave background radiation, providing evidence for the Big Bang theory.", ""],
+            [[1969], null, 1, "Moon Landing (USA)", "Apollo 11 mission successfully lands the first humans on the Moon, advancing space exploration.", ""],
+            [[1995], null, 1, "First Exoplanet (Switzerland)", "Michel Mayor and Didier Queloz discover the first exoplanet orbiting a sun-like star outside our solar system.", ""],
+            [[1998], null, 1, "Accelerating Universe (USA)", "Observations of distant supernovae lead to the discovery that the expansion of the universe is accelerating.", ""],
+          ]
+        },
+        {
+          "name": "Chemistry",
+          "color": "amber",
+          "dates": [
+            [[-400], null, 1, "Atomic Theory (Greece)", "Leucippus and Democritus propose the concept of atoms as indivisible particles.", ""],
+            [[-300], null, 1, "Alchemy (Various)", "Alchemy emerges as an early form of chemistry, focusing on transmutation and the search for the philosopher's stone.", ""],
+            [[1661], null, 1, "Phlogiston Theory (Germany)", "Johann Joachim Becher proposes the phlogiston theory, suggesting that substances contain a fiery principle called phlogiston.", ""],
+            [[1774], null, 1, "Discovery of Oxygen (England)", "Joseph Priestley and Carl Wilhelm Scheele independently discover oxygen gas.", ""],
+            [[1808], null, 1, "Atomic Theory (England)", "John Dalton publishes his atomic theory, proposing that elements are composed of indivisible atoms.", ""],
+            [[1869], null, 1, "Periodic Table (Russia)", "Dmitri Mendeleev develops the periodic table, arranging elements by their atomic mass and properties.", ""],
+            [[1897], null, 1, "Discovery of Electron (England)", "J.J. Thomson discovers the electron, leading to the development of the plum pudding model of the atom.", ""],
+            [[1913], null, 1, "Bohr Model of the Atom (Denmark)", "Niels Bohr proposes a model of the atom with quantized electron energy levels.", ""],
+            [[1932], null, 1, "Discovery of Neutron (England)", "James Chadwick discovers the neutron, leading to a better understanding of atomic structure.", ""],
+            [[1939], null, 1, "Discovery of Nuclear Fission (Germany)", "Otto Hahn and Fritz Strassmann discover nuclear fission, laying the groundwork for nuclear energy and weapons.", ""],
+            [[1953], null, 1, "DNA Structure (United Kingdom/USA)", "James Watson and Francis Crick propose the double helix structure of DNA.", ""],
+            // [[1985], null, 1, "Discovery of Fullerenes (USA)", "Robert Curl, Harold Kroto, and Richard Smalley discover fullerenes, a new form of carbon.", ""],
+            // [[1996], null, 1, "Discovery of Buckminsterfullerene (UK/USA)", "Robert Curl, Harold Kroto, and Richard Smalley discover Buckminsterfullerene, a spherical fullerene.", ""], 
+          ]
+        },
+        {
+          "name": "Biology",
+          "color": "green",
+          "dates": [
+            [[1665], null, 1, "Microbiology (Netherlands)", "Antonie van Leeuwenhoek discovers microorganisms using a microscope.", ""],
+            [[1859], null, 1, "Evolution by Natural Selection (England)", "Charles Darwin publishes 'On the Origin of Species', proposing the theory of evolution by natural selection.", ""],
+            [[1953], null, 1, "DNA Structure (United Kingdom/USA)", "James Watson and Francis Crick propose the double helix structure of DNA.", ""],
             
-    //       ]
-    //     },
-    //     {
-    //       "name": "Culture",
-    //       "color": "amber",
-    //       "dates": [
-    //         [[538], null, 1, "Buddhism", "Introduction of Buddhism from China", "Buddhism"],
-            
-    //       ]
-    //     },
-    //     {
-    //       "name": "Science",
-    //       "color": "blue",
-    //       "dates": [
-    //         [[538], null, 1, "Buddhism", "Introduction of Buddhism from China", "Buddhism"],
-            
-    //       ]
-    //     }
-    //   ]
-    // },
+          ]
+        },
+        {
+          "name": "Medicine",
+          "color": "white",
+          "dates": [
+            [[1928], null, 1, "Penicillin (Scotland)", "Alexander Fleming discovers the antibiotic properties of penicillin, revolutionizing medicine.", ""],
+          ]
+        }
+      ]
+    },
 
     // // History of Flight and Spacetravel
     // {
@@ -316,64 +391,6 @@ function getTimelineData() {
     //     }
     //   ]
     // },
-
-    // Ancient Rome
-    {
-      "name": "Ancient Rome",
-      "description": "A timeline of ancient Rome.",
-      "color": "amber",
-      "options": {
-        "min": [-1100,1,1],
-        "max": [1600,1,1],
-      },
-      "groups": [
-        {
-          "name": "Periods",
-          "color": "red",
-          "dates": [
-            [[-750], [-510], 2, "Roman Kingdom", "Rome is ruled by the (semi-mythological) seven kings of Rome: Romulus, Numa Pompilius, Tulus Hostilius, Ancus Marcius, Lucius Tarquinius Priscus, Servius Tullius, Lucius Tarquinius Superbus. ", "Roman_Kingdom"],
-            [[-509], [-28], 2, "Roman Republic", "The Roman Republic is ruled with a system of elected officials.", "Roman_Republic"]
-            [[-27], [394], 2, "Roman Empire", "The Roman Empire is ruled by an emperor.", "Roman_Empire"]
-            [[395], [476], 2, "Western Roman Empire", "The Western Roman Empire.", "Western_Roman_Empire"]
-            [[395], [1453], 2, "Eastern Roman Empire", "The Eastern Roman Empire (Byzantine Empire).", "Byzantine_Empire"]
-          ]
-        },
-        {
-          "name": "Politics",
-          "color": "purple",
-          "dates": [
-
-            [[-753], null, 1, "Traditional founding of Rome", "According to legend, Rome is founded by Romulus.", ""],
-            [[-390], null, 1, "Sack of Rome by the Gauls", "Rome is sacked by the Gauls under Brennus.", ""],
-            [[-264], [-241], 2, "First Punic War", "First major conflict between Rome and Carthage over control of Sicily.", ""],
-            [[-218], [-201], 2, "Second Punic War", "Hannibal leads Carthaginian forces in a daring invasion of Italy.", ""],
-            [[-149], [-146], 2, "Third Punic War", "Rome destroys Carthage, ending the Punic Wars.", ""],
-            [[-133], null, 1, "Tiberius Gracchus murdered", "Beginning of political unrest leading to the fall of the Republic.", ""],
-            [[-60], null, 1, "Formation of the First Triumvirate", "Julius Caesar, Pompey, and Crassus form an alliance.", ""],
-            [[-49], [-45], 2, "Caesar's Civil War", "Julius Caesar defeats Pompey, becoming dictator of Rome.", ""],
-            [[-44], null, 1, "Assassination of Julius Caesar", "Julius Caesar is assassinated on the Ides of March.", ""],
-            [[-31], null, 1, "Battle of Actium", "Octavian defeats Antony and Cleopatra, becoming ruler of Rome.", ""],
-            [[-27], null, 1, "Octavian becomes Augustus", "Octavian becomes the first Emperor of Rome, establishing the Empire.", ""],
-            [[70], null, 1, "Destruction of the Second Temple", "Roman army destroys the Second Temple in Jerusalem.", ""],
-            [[79], null, 1, "Eruption of Mount Vesuvius", "Volcanic eruption buries Pompeii and Herculaneum.", ""],
-            [[235], [285], 2, "Crisis of the Third Century", "Period of political instability, economic crisis, and civil wars.", "Crisis_of_the_Third_Century"]
-            [[313], null, 1, "Edict of Milan", "Constantine grants religious tolerance to Christians in the Roman Empire.", ""],
-            [[395], null, 1, "Division of the Roman Empire", "The Roman Empire splits into the Western Roman Empire and the Eastern Roman Empire (Byzantine Empire)."]
-            [[410], null, 1, "Sack of Rome by the Visigoths", "Rome is sacked for the first time in over 800 years.", ""],
-            [[476], null, 1, "Fall of the Western Roman Empire", "Traditional date for the fall of the Western Roman Empire.", ""],
-
-          ]
-        },
-        {
-          "name": "Culture",
-          "color": "amber",
-          "dates": [
-            [[-620], null, 1, "Ostia", "Possible founding date for Ostia, the port of Rome. ", ""],
-            
-          ]
-        },
-      ]
-    },
 
 
     

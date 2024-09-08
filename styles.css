@@ -18,7 +18,7 @@
 
 html,
 body {
-  font-family:OpenSans;/*, Verdana, sans-serif;*/
+  font-family: OpenSans;/*, Verdana, sans-serif;*/
   font-size:clamp(12px,calc(.8rem + .25vw),20px);
   font-weight:400;
   line-height: 1.5;
@@ -474,7 +474,7 @@ div.vis-group {
 .tab .tablinks {
   background-color: var(--bgButton);
   color: inherit;
-  font-family: 'Open Sans';
+  font-family: OpenSans;
   float: left;
   border: none;
   outline: none;
